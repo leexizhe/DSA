@@ -4,7 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ContainsDuplicate {
-    // https://leetcode.com/problems/contains-duplicate/description/
+    // time O(n)
+    // space O(n)
+    // hashmap
+
     private static boolean containsDuplicate(int[] nums) {
         // time O(n)
         // space O(n)

@@ -2,10 +2,13 @@ package Arrays_Hashing;
 
 import java.util.HashMap;
 
+import static common.PrintArray.printArray;
+
 public class TwoSum {
     private static int[] twoSum(int[] nums, int target) {
         // time O(n)
         // space O(n)
+        // hashmap
 
         HashMap<Integer, Integer> hashMap = new HashMap();
         for (int i = 0; i < nums.length; i++) {
@@ -19,14 +22,6 @@ public class TwoSum {
             }
         }
         return null;
-    }
-
-    private static void printArray(int[] nums) {
-        System.out.print("[ ");
-        for (int i = 0; i < nums.length; i++) {
-            System.out.print(nums[i] + " ");
-        }
-        System.out.println("]");
     }
 
     public static void main(String[] args) {

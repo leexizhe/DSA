@@ -6,6 +6,8 @@ public class ValidAnagram {
     private static boolean isAnagram(String s, String t) {
         // time O(n)
         // space O(n)
+        
+
         if (s.length() != t.length()) {
             return false;
         }
