@@ -3,6 +3,10 @@ package Arrays_Hashing;
 import java.util.*;
 
 public class GroupAnagrams {
+    // time O(n*m)
+    // space O(n*m) where m is the number of characters
+    // hashmap
+
     private static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         List<List<String>> list = new LinkedList<>();
@@ -19,15 +23,6 @@ public class GroupAnagrams {
         }
 
         return new ArrayList<>(map.values());
-
-//        for(Map.Entry<String, List<String>> entry : map.entrySet()) {
-//            List<String> l1 = new LinkedList<>();
-//            for (String s : entry.getValue()){
-//                l1.add(s);
-//            }
-//            list.add(l1);
-//        }
-//        return list;
 
     }
 

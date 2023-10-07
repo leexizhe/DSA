@@ -4,6 +4,9 @@ import static common.PrintArray.printArray;
 
 public class ProductOfArrayExceptSelf {
     private static int[] productExceptSelf(int[] nums) {
+        // time O(n)
+        // space O(n)
+        // use another array
 
         int left = 1;
         int right = 1;
