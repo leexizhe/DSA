@@ -7,7 +7,6 @@ public class ValidAnagram {
         // time O(n)
         // space O(n)
         // use another array
-        
 
         if (s.length() != t.length()) {
             return false;
@@ -40,10 +39,9 @@ public class ValidAnagram {
     }
 
     public static void main(String[] args) {
-        System.out.println(isAnagram("anagram","nagaram"));
-        System.out.println(isAnagram_sorted("anagram","nagaram"));
-        System.out.println(isAnagram("rat","cat"));
-        System.out.println(isAnagram_sorted("rat","cat"));
+        System.out.println(isAnagram("anagram", "nagaram"));
+        System.out.println(isAnagram_sorted("anagram", "nagaram"));
+        System.out.println(isAnagram("rat", "cat"));
+        System.out.println(isAnagram_sorted("rat", "cat"));
     }
-
 }

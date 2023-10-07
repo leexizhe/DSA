@@ -1,8 +1,8 @@
 package Arrays_Hashing;
 
-import java.util.HashMap;
-
 import static common.PrintArray.printArray;
+
+import java.util.HashMap;
 
 public class TwoSum {
     private static int[] twoSum(int[] nums, int target) {
@@ -25,9 +25,9 @@ public class TwoSum {
     }
 
     public static void main(String[] args) {
-        int[] array1 = {2,7,11,15};
-        int[] array2 = {3,2,4};
-        int[] array3 = {3,3};
+        int[] array1 = {2, 7, 11, 15};
+        int[] array2 = {3, 2, 4};
+        int[] array3 = {3, 3};
 
         printArray(twoSum(array1, 9));
         printArray(twoSum(array2, 6));

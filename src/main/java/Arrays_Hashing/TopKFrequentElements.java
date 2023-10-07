@@ -1,10 +1,10 @@
 package Arrays_Hashing;
 
+import static common.PrintArray.printArray;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
-
-import static common.PrintArray.printArray;
 
 public class TopKFrequentElements {
     private static int[] topKFrequent(int[] nums, int k) {
@@ -32,9 +32,7 @@ public class TopKFrequentElements {
         int[] nums1 = {1, 1, 1, 2, 2, 3};
         int[] nums2 = {1};
 
-        printArray(topKFrequent(nums1,  2));
-        printArray(topKFrequent(nums2,  1));
+        printArray(topKFrequent(nums1, 2));
+        printArray(topKFrequent(nums2, 1));
     }
 }
-
-

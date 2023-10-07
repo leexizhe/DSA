@@ -11,7 +11,7 @@ public class GroupAnagrams {
         Map<String, List<String>> map = new HashMap<>();
         List<List<String>> list = new LinkedList<>();
 
-        for (String str: strs) {
+        for (String str : strs) {
             char[] arr = new char[26];
             for (int i = 0; i < str.length(); i++) {
                 arr[str.charAt(i) - 'a']++;
@@ -23,11 +23,10 @@ public class GroupAnagrams {
         }
 
         return new ArrayList<>(map.values());
-
     }
 
     public static void main(String[] args) {
-        String[] strings1 = {"eat","tea","tan","ate","nat","bat"};
+        String[] strings1 = {"eat", "tea", "tan", "ate", "nat", "bat"};
         String[] strings2 = {"eat", "tea", "ate"};
         String[] strings3 = {"a"};
         System.out.println(groupAnagrams(strings1));
