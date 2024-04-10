@@ -5,14 +5,14 @@ import java.util.Set;
 
 public class ContainsDuplicate {
     /**
-     * Time Complexity:
+     * Time Complexity: O(n)
      * The time complexity of this solution is O(n), where n is the number of elements in the array.
      * This is because iterating through the array takes O(n) time, and adding an element to the HashSet and checking for containment takes O(1) on average.
      *
-     * Space Complexity:
+     * Space Complexity: O(n)
      * The space complexity is O(n), where n is the number of elements in the array.
      * This is because the HashSet can contain at most n elements if all elements are unique.
-     **/
+     */
     private static boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {

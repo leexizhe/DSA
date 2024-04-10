@@ -3,6 +3,14 @@ package answers.arrays_hashing;
 import java.util.Arrays;
 
 public class ValidAnagram {
+    /**
+     * Time Complexity: O(n)
+     * Iterating through both strings to count characters takes O(n), where n is the length of the strings.
+     *
+     * Space Complexity: O(1)
+     * The size of the count array (26 elements) is constant and does not depend on the input size.
+     * Thus, the space complexity is constant.
+     */
     private static boolean isAnagram(String s, String t) {
         // time O(n)
         // space O(n)
