@@ -9,8 +9,6 @@ public class ContainsDuplicate {
     // hashmap
 
     private static boolean containsDuplicate(int[] nums) {
-        // time O(n)
-        // space O(n)
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {
             if (set.contains(nums[i])) {
