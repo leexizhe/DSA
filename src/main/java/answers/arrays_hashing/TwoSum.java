@@ -1,4 +1,4 @@
-package Arrays_Hashing;
+package answers.arrays_hashing;
 
 import static common.PrintArray.printArray;
 
