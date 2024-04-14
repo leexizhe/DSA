@@ -6,9 +6,15 @@ import java.util.HashMap;
 
 public class TwoSum {
     private static int[] twoSum(int[] nums, int target) {
-        // time O(n)
-        // space O(n)
-        // hashmap
+        /**
+         * Time Complexity: O(n)
+         * The time complexity of this solution is O(n), where n is the number of elements in the input array nums.
+         * This is because we iterate through the array only once, and each lookup and insertion operation in the HashMap takes O(1) time on average.
+         *
+         * Space Complexity: O(n)
+         * The space complexity of this solution is O(n), where n is the number of elements in the input array nums.
+         * This is because we store at most n elements in the HashMap.
+         */
 
         HashMap<Integer, Integer> hashMap = new HashMap();
         for (int i = 0; i < nums.length; i++) {
@@ -16,10 +22,9 @@ public class TwoSum {
             int diff = target - num;
 
             if (hashMap.containsKey(diff)) {
-                return new int[] {hashMap.get(diff), i};
-            } else {
-                hashMap.put(num, i);
+                return new int[]{hashMap.get(diff), i};
             }
+            hashMap.put(num, i);
         }
         return null;
     }
