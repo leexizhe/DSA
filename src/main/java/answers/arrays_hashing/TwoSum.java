@@ -15,18 +15,16 @@ public class TwoSum {
          * The space complexity of this solution is O(n), where n is the number of elements in the input array nums.
          * This is because we store at most n elements in the HashMap.
          */
-
-        HashMap<Integer, Integer> hashMap = new HashMap();
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             int num = nums[i];
             int diff = target - num;
-
-            if (hashMap.containsKey(diff)) {
-                return new int[]{hashMap.get(diff), i};
+            if (map.containsKey(diff)) {
+                return new int[] {map.get(diff), i};
             }
-            hashMap.put(num, i);
+            map.put(num, i);
         }
-        return null;
+        return new int[] {};
     }
 
     public static void main(String[] args) {

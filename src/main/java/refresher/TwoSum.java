@@ -9,11 +9,10 @@ public class TwoSum {
             int num = nums[i];
             int diff = target - num;
             if (map.containsKey(diff)) {
-                return new int[]{map.get(diff), i};
+                return new int[] {map.get(diff), i};
             }
             map.put(num, i);
-
         }
-        return new int[]{};
+        return new int[] {};
     }
 }

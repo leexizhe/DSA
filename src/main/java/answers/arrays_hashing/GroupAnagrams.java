@@ -1,15 +1,22 @@
 package answers.arrays_hashing;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class GroupAnagrams {
-    // time O(n*m)
-    // space O(n*m) where m is the number of characters
-    // hashmap
-
+    /**
+     * Time Complexity: O(n * k)
+     * Iterating through each string in the input array strs and counting the frequency of each character in it takes O(n * k) time,
+     * where n is the number of strings in the array and k is the maximum length of a string.
+     * The usage of computeIfAbsent method takes constant time O(1) for each string.
+     *
+     * Space Complexity: O(n * k)
+     * The space complexity of this solution is O(n * k), where n is the number of strings in the input array strs, and k is the maximum length of a string.
+     * This space is occupied by the HashMap map, where we store the unique keys and lists of anagrams.
+     */
     private static List<List<String>> groupAnagrams(String[] strs) {
-        Map<String, List<String>> map = new HashMap<>();
-        List<List<String>> list = new LinkedList<>();
+        HashMap<String, List<String>> map = new HashMap<>();
 
         for (String str : strs) {
             char[] arr = new char[26];
