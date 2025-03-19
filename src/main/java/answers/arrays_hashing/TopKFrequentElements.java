@@ -38,7 +38,7 @@ public class TopKFrequentElements {
     }
 
     public static void main(String[] args) {
-        int[] nums1 = {1, 1, 1, 2, 2, 3};
+        int[] nums1 = {1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3};
         int[] nums2 = {1};
 
         printArray(topKFrequent(nums1, 2));
