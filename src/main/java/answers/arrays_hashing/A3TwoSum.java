@@ -47,5 +47,4 @@ public class A3TwoSum {
         printArray(twoSum(array3, 6));
         printArray(twoSum(array3, 7));
     }
-
 }
