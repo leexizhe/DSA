@@ -4,7 +4,7 @@ import static common.PrintArray.printArray;
 
 import java.util.HashMap;
 
-public class TwoSum {
+public class A3TwoSum {
     /**
      * Time Complexity: O(n)
      * The time complexity of this solution is O(n), where n is the number of elements in the input array `nums`.
@@ -47,4 +47,5 @@ public class TwoSum {
         printArray(twoSum(array3, 6));
         printArray(twoSum(array3, 7));
     }
+
 }
