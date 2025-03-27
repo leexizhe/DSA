@@ -2,7 +2,7 @@ package answers.arrays_hashing;
 
 import static common.PrintArray.printArray;
 
-public class ProductOfArrayExceptSelf {
+public class A7ProductOfArrayExceptSelf {
     /**
      * Time Complexity: O(n)
      * - The array is traversed twice, once from left to right and once from right to left. Each traversal takes O(n).

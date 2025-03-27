@@ -3,7 +3,7 @@ package answers.arrays_hashing;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ValidSudoku {
+public class A8ValidSudoku {
     /**
      * Time Complexity: O(1)
      * - The board has a fixed size of 9x9 (81 cells), so the number of operations is constant.
