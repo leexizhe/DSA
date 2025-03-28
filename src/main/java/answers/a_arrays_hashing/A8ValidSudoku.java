@@ -1,4 +1,4 @@
-package answers.arrays_hashing;
+package answers.a_arrays_hashing;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,13 +22,12 @@ public class A8ValidSudoku {
                 char number = board[i][j];
 
                 // Skip empty cells
-                if (number != '.') {
-                    // Add constraints to the set
-                    if (!seen.add(number + " in row " + i)
-                            || !seen.add(number + " in column " + j)
-                            || !seen.add(number + " in block " + (i / 3) + "-" + (j / 3))) {
-                        return false; // If any constraint is violated, return false
-                    }
+                // Add constraints to the set
+                if (number != '.'
+                        && (!seen.add(number + " in row " + i)
+                                || !seen.add(number + " in column " + j)
+                                || !seen.add(number + " in block " + (i / 3) + "-" + (j / 3)))) {
+                    return false; // If any constraint is violated, return false
                 }
             }
         }

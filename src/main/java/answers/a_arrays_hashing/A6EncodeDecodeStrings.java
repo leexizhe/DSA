@@ -1,4 +1,4 @@
-package answers.arrays_hashing;
+package answers.a_arrays_hashing;
 
 import java.util.ArrayList;
 import java.util.Arrays;

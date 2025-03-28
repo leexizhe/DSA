@@ -1,4 +1,4 @@
-package answers.arrays_hashing;
+package answers.a_arrays_hashing;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,17 +27,15 @@ public class A9LongestConsecutiveSequence {
         for (int num : nums) {
             // Only start a sequence if the current number is the beginning
             if (!numSet.contains(num - 1)) {
-                int currentNum = num;
-                int currentStreak = 1;
+                int length = 1;
 
                 // Step 3: Count the length of the consecutive sequence
-                while (numSet.contains(currentNum + 1)) {
-                    currentNum++;
-                    currentStreak++;
+                while (numSet.contains(num + length)) {
+                    length++;
                 }
 
                 // Update the longest streak
-                longestStreak = Math.max(longestStreak, currentStreak);
+                longestStreak = Math.max(longestStreak, length);
             }
         }
 
