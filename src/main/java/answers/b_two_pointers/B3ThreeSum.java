@@ -59,7 +59,6 @@ public class B3ThreeSum {
         int[] array1 = {-1, 0, 1, 2, -1, -4};
         int[] array2 = {-1, 0, 1, 2, -1, -4};
         int[] array3 = {-2, 0, 1, 1, 2};
-
         System.out.println(threeSum(array1)); // Output: [[-1, -1, 2], [-1, 0, 1]]
         System.out.println(threeSum(array2)); // Output: [[-1, -1, 2], [-1, 0, 1]]
         System.out.println(threeSum(array3)); // Output: [[-2, 0, 2], [-2, 1, 1]]
