@@ -20,15 +20,15 @@ public class B2TwoIntegerSumII {
         while (left < right) {
             int sum = numbers[left] + numbers[right]; // Calculate the sum of the two numbers
 
-            if (sum == target) {
-                // Return indices if the sum equals the target (1-based index)
-                return new int[] {left + 1, right + 1};
+            if (sum > target) {
+                // Move the right pointer backward to decrease the sum
+                right--;
             } else if (sum < target) {
                 // Move the left pointer forward to increase the sum
                 left++;
             } else {
-                // Move the right pointer backward to decrease the sum
-                right--;
+                // Return indices if the sum equals the target (1-based index)
+                return new int[] {left + 1, right + 1};
             }
         }
 
