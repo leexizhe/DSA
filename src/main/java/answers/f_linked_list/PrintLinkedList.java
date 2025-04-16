@@ -1,8 +1,7 @@
 package answers.f_linked_list;
 
 public class PrintLinkedList {
-    private PrintLinkedList() {
-    }
+    private PrintLinkedList() {}
 
     public static void printLinkedList(ListNode head) {
         ListNode current = head;
