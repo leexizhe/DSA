@@ -17,7 +17,7 @@ public class C6CarFleet {
 
         // Step 1: Store positions and times to reach target
         for (int i = 0; i < n; i++) {
-            cars[i] = new double[]{position[i], (double) (target - position[i]) / speed[i]};
+            cars[i] = new double[] {position[i], (double) (target - position[i]) / speed[i]};
         }
 
         // Step 2: Sort cars by position (farthest to closest)
