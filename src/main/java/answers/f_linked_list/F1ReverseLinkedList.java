@@ -1,5 +1,7 @@
 package answers.f_linked_list;
 
+import static answers.f_linked_list.PrintLinkedList.printLinkedList;
+
 public class F1ReverseLinkedList {
     /**
      * Time Complexity: O(n)
@@ -31,20 +33,5 @@ public class F1ReverseLinkedList {
         printLinkedList(reverseList(list1));
         printLinkedList(reverseList(list2));
         printLinkedList(reverseList(list3));
-    }
-
-    public static void printLinkedList(ListNode head) {
-        ListNode current = head;
-        StringBuilder sb = new StringBuilder();
-
-        while (current != null) {
-            sb.append(current.val);
-            if (current.next != null) {
-                sb.append(" -> ");
-            }
-            current = current.next;
-        }
-
-        System.out.println(sb);
     }
 }
