@@ -1,6 +1,6 @@
-package answers.d_binary_search;
+package answers.e_sliding_window;
 
-public class D8LongestRepeatingCharacterReplacement {
+public class E3LongestRepeatingCharacterReplacement {
     /**
      * Time Complexity: O(n)
      * The time complexity of this solution is O(n), where n is the length of the input string `s`.

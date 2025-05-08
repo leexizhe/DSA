@@ -1,8 +1,8 @@
-package answers.d_binary_search;
+package answers.e_sliding_window;
 
 import java.util.Arrays;
 
-public class D9PermutationInString {
+public class E4PermutationInString {
     /**
      * Time Complexity: O(n)
      * The time complexity of this solution is O(n), where n is the length of the input string `s2`.
