@@ -30,8 +30,7 @@ public class E5MinimumWindowSubstring {
             windowFreq.put(rightChar, windowFreq.getOrDefault(rightChar, 0) + 1);
 
             // If character frequency matches, increment matched count
-            if (targetFreq.containsKey(rightChar) &&
-                    windowFreq.get(rightChar).equals(targetFreq.get(rightChar))) {
+            if (targetFreq.containsKey(rightChar) && windowFreq.get(rightChar).equals(targetFreq.get(rightChar))) {
                 matchedChars++;
             }
 
@@ -48,8 +47,7 @@ public class E5MinimumWindowSubstring {
                 windowFreq.put(leftChar, windowFreq.get(leftChar) - 1);
 
                 // If a required character count drops below target, decrement matched count
-                if (targetFreq.containsKey(leftChar) &&
-                        windowFreq.get(leftChar) < targetFreq.get(leftChar)) {
+                if (targetFreq.containsKey(leftChar) && windowFreq.get(leftChar) < targetFreq.get(leftChar)) {
                     matchedChars--;
                 }
 
