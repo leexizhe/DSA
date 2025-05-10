@@ -3,6 +3,7 @@ package answers.f_linked_list;
 public class ListNode {
     int val;
     ListNode next;
+    ListNode random;
 
     ListNode() {}
 
