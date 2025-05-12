@@ -1,8 +1,8 @@
 package answers.f_linked_list;
 
-import java.util.PriorityQueue;
-
 import static answers.f_linked_list.PrintLinkedList.printLinkedList;
+
+import java.util.PriorityQueue;
 
 public class F10MergeKSortedLists {
     /**
@@ -44,7 +44,6 @@ public class F10MergeKSortedLists {
 
         return dummy.next;
     }
-
 
     public static void main(String[] args) {
         ListNode[] lists = new ListNode[3];
