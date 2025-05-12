@@ -2,46 +2,42 @@ package answers.b_two_pointers;
 
 public class B5TrappingRainWater {
     /**
+     * Key Techniques:
+     * ✅ Two-Pointer Approach → Efficiently tracks trapped water levels.
+     * ✅ O(n) Time Complexity → Single-pass optimization.
+     * ✅ O(1) Space Complexity → No extra storage required.
+     *
      * Time Complexity: O(n)
-     * - The array is traversed once using the two-pointer approach.
-     * - Therefore, the overall time complexity is O(n).
+     * Each index is processed at most once, ensuring linear efficiency.
      *
      * Space Complexity: O(1)
-     * - No additional data structures (like arrays) are used, only variables for pointers and calculations.
-     * - Thus, the space complexity is O(1).
+     * Uses only a few extra variables for tracking max heights.
      */
     public static int trap(int[] height) {
-        // Edge case: If the height array is empty or null, no water can be trapped
         if (height == null || height.length == 0) return 0;
 
-        // Initialize pointers, maximum heights, and result
-        int left = 0;
-        int right = height.length - 1;
-        int leftMax = height[left];
-        int rightMax = height[right];
-        int result = 0;
+        int left = 0, right = height.length - 1;
+        int leftMax = 0, rightMax = 0, trappedWater = 0;
 
-        // Use a two-pointer approach
-        while (left < right) {
-            if (leftMax < rightMax) {
-                // Move left pointer forward
+        while (left <= right) {
+            if (height[left] <= height[right]) {
+                if (height[left] >= leftMax) {
+                    leftMax = height[left]; // Update left max
+                } else {
+                    trappedWater += leftMax - height[left]; // Calculate trapped water
+                }
                 left++;
-                // Update the left maximum height
-                leftMax = Math.max(leftMax, height[left]);
-                // Calculate the water trapped at the current position
-                result += leftMax - height[left];
             } else {
-                // Move right pointer backward
+                if (height[right] >= rightMax) {
+                    rightMax = height[right]; // Update right max
+                } else {
+                    trappedWater += rightMax - height[right]; // Calculate trapped water
+                }
                 right--;
-                // Update the right maximum height
-                rightMax = Math.max(rightMax, height[right]);
-                // Calculate the water trapped at the current position
-                result += rightMax - height[right];
             }
         }
 
-        // Return the total water trapped
-        return result;
+        return trappedWater;
     }
 
     public static void main(String[] args) {

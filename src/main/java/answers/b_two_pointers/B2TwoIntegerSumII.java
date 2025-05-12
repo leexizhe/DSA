@@ -4,36 +4,33 @@ import static common.PrintArray.printArray;
 
 public class B2TwoIntegerSumII {
     /**
+     * Key Techniques:
+     * ✅ Two-Pointer Approach → Efficiently finds target sum in a sorted array.
+     * ✅ O(n) Time Complexity → Single-pass iteration.
+     * ✅ O(1) Space Complexity → No extra storage required.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of elements in the input array `numbers`.
-     * This is because we iterate through the array once, using a two-pointer approach to find the solution.
+     * Each element is processed at most once, ensuring linear efficiency.
      *
      * Space Complexity: O(1)
-     * The space complexity of this solution is O(1), as no additional data structures are used beyond a few integer variables.
+     * Only a few extra variables are used for tracking indices.
      */
-    public static int[] twoSumII(int[] numbers, int target) {
-        // Initialize two pointers
-        int left = 0; // Start pointer
-        int right = numbers.length - 1; // End pointer
+    public static int[] twoSum(int[] numbers, int target) {
+        int left = 0, right = numbers.length - 1;
 
-        // Use the two-pointer approach
         while (left < right) {
-            int sum = numbers[left] + numbers[right]; // Calculate the sum of the two numbers
+            int sum = numbers[left] + numbers[right];
 
-            if (sum > target) {
-                // Move the right pointer backward to decrease the sum
-                right--;
+            if (sum == target) {
+                return new int[] {left + 1, right + 1}; // Return 1-based indices
             } else if (sum < target) {
-                // Move the left pointer forward to increase the sum
-                left++;
+                left++; // Move left pointer forward
             } else {
-                // Return indices if the sum equals the target (1-based index)
-                return new int[] {left + 1, right + 1};
+                right--; // Move right pointer backward
             }
         }
 
-        // Return an empty array if no solution is found
-        return new int[0];
+        return new int[] {-1, -1}; // Target not found
     }
 
     public static void main(String[] args) {
@@ -41,8 +38,8 @@ public class B2TwoIntegerSumII {
         int[] array2 = {2, 3, 4};
         int[] array3 = {-1, 0};
 
-        printArray(twoSumII(array1, 9)); // Output: [1, 2]
-        printArray(twoSumII(array2, 6)); // Output: [1, 3]
-        printArray(twoSumII(array3, -1)); // Output: [1, 2]
+        printArray(twoSum(array1, 9)); // Output: [1, 2]
+        printArray(twoSum(array2, 6)); // Output: [1, 3]
+        printArray(twoSum(array3, -1)); // Output: [1, 2]
     }
 }

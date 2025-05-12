@@ -4,43 +4,38 @@ import java.util.Stack;
 
 public class C3EvaluateReversePolishNotation {
     /**
+     * Key Techniques:
+     * ✅ Stack → Efficiently evaluates postfix expressions.
+     * ✅ O(n) Time Complexity → Single-pass processing of tokens.
+     * ✅ O(n) Space Complexity → Stores operands during evaluation.
+     *
      * Time Complexity: O(n)
-     * - The algorithm iterates through the input tokens once, processing each token in O(1) time.
-     * - Therefore, the overall time complexity is O(n), where n is the number of tokens in the input array.
+     * Each token is processed once, making the solution linear.
      *
      * Space Complexity: O(n)
-     * - The space complexity is O(n) because we use a stack to store intermediate results.
+     * In the worst case, the stack holds all operands.
      */
-    private static int evalRPN(String[] tokens) {
-        // Step 1: Use a stack to evaluate expressions
+    public static int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
 
-        // Step 2: Iterate through tokens
+        // Step 1: Process each token
         for (String token : tokens) {
-            if (token.equals("+")) {
-                // Addition operation
-                stack.push(stack.pop() + stack.pop());
-            } else if (token.equals("-")) {
-                // Subtraction operation
-                int a = stack.pop();
-                int b = stack.pop();
-                stack.push(b - a);
-            } else if (token.equals("/")) {
-                // Division operation
-                int a = stack.pop();
-                int b = stack.pop();
-                stack.push(b / a); // Integer division
-            } else if (token.equals("*")) {
-                // Multiplication operation
-                stack.push(stack.pop() * stack.pop());
-            } else {
-                // Push operand onto the stack
-                stack.push(Integer.parseInt(token));
+            switch (token) {
+                case "+" -> stack.push(stack.pop() + stack.pop());
+                case "-" -> {
+                    int b = stack.pop(), a = stack.pop();
+                    stack.push(a - b);
+                }
+                case "*" -> stack.push(stack.pop() * stack.pop());
+                case "/" -> {
+                    int b = stack.pop(), a = stack.pop();
+                    stack.push(a / b);
+                }
+                default -> stack.push(Integer.parseInt(token)); // Push numbers onto stack
             }
         }
 
-        // Step 3: Return the final result
-        return stack.pop();
+        return stack.pop(); // Final result
     }
 
     public static void main(String[] args) {

@@ -2,47 +2,52 @@ package answers.d_binary_search;
 
 public class D7MedianOfTwoSortedArrays {
     /**
-     * Time Complexity: O(log(min(m, n)))
-     * The time complexity of this solution is O(log(min(m, n))), where `m` and `n` are the lengths of the input arrays.
-     * Since we apply binary search on the smaller array, the performance is optimized.
+     * Key Techniques:
+     * ✅ Binary Search → Efficiently finds median without merging.
+     * ✅ O(log(min(m, n))) Time Complexity → Optimal search on smaller array.
+     * ✅ O(1) Space Complexity → No extra storage used.
+     *
+     * Time Complexity: O(log min(m, n))
+     * We apply binary search on the smaller array to find partition.
      *
      * Space Complexity: O(1)
-     * The space complexity of this solution is O(1) as we only use a few integer variables.
+     * Uses only a few extra variables for index tracking.
      */
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         if (nums1.length > nums2.length) {
-            return findMedianSortedArrays(nums2, nums1); // Ensure binary search is applied on the smaller array
+            return findMedianSortedArrays(nums2, nums1); // Ensure binary search runs on smaller array
         }
 
-        int x = nums1.length;
-        int y = nums2.length;
-        int low = 0;
-        int high = x;
+        int m = nums1.length, n = nums2.length;
+        int left = 0, right = m;
+        int partitionX, partitionY;
 
-        while (low <= high) {
-            int partitionX = low + (high - low) / 2;
-            int partitionY = (x + y + 1) / 2 - partitionX;
+        while (left <= right) {
+            partitionX = left + (right - left) / 2;
+            partitionY = (m + n + 1) / 2 - partitionX;
 
             int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : nums1[partitionX - 1];
-            int minRightX = (partitionX == x) ? Integer.MAX_VALUE : nums1[partitionX];
+            int minRightX = (partitionX == m) ? Integer.MAX_VALUE : nums1[partitionX];
 
             int maxLeftY = (partitionY == 0) ? Integer.MIN_VALUE : nums2[partitionY - 1];
-            int minRightY = (partitionY == y) ? Integer.MAX_VALUE : nums2[partitionY];
+            int minRightY = (partitionY == n) ? Integer.MAX_VALUE : nums2[partitionY];
 
+            // Step 1: Check if partition is correct
             if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
-                if ((x + y) % 2 == 0) {
+                // Step 2: Compute median based on total size
+                if ((m + n) % 2 == 0) {
                     return (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2.0;
                 } else {
                     return Math.max(maxLeftX, maxLeftY);
                 }
             } else if (maxLeftX > minRightY) {
-                high = partitionX - 1;
+                right = partitionX - 1; // Move left
             } else {
-                low = partitionX + 1;
+                left = partitionX + 1; // Move right
             }
         }
 
-        throw new IllegalArgumentException("Invalid input");
+        throw new IllegalArgumentException("Input arrays are not sorted properly");
     }
 
     public static void main(String[] args) {

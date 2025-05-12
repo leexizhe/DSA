@@ -1,45 +1,40 @@
 package answers.a_arrays_hashing;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class A9LongestConsecutiveSequence {
     /**
+     * Key Techniques:
+     * ✅ HashSet → Enables O(1) lookups for sequence continuity.
+     * ✅ O(n) Time Complexity → Avoids sorting overhead.
+     * ✅ O(n) Space Complexity → Stores unique elements efficiently.
+     *
      * Time Complexity: O(n)
-     * - The array is traversed once to insert elements into a `HashSet`, which takes O(n).
-     * - Each element is then checked to find the starting point of a sequence, and each sequence is processed once.
-     * - Therefore, the overall time complexity is O(n).
+     * Each number is processed once, ensuring linear efficiency.
      *
      * Space Complexity: O(n)
-     * - A `HashSet` is used to store all elements of the input array, requiring O(n) space.
-     * - The space complexity is proportional to the input size.
+     * Stores distinct elements in a hash set.
      */
     public static int longestConsecutive(int[] nums) {
-        // Step 1: Add all numbers to a HashSet for O(1) lookup
-        Set<Integer> numSet = new HashSet<>();
+        HashSet<Integer> set = new HashSet<>();
         for (int num : nums) {
-            numSet.add(num);
+            set.add(num); // Store unique numbers
         }
 
-        int longestStreak = 0;
+        int maxLength = 0;
 
-        // Step 2: Check for the start of a sequence
+        // Step 1: Traverse numbers and find sequence starts
         for (int num : nums) {
-            // Only start a sequence if the current number is the beginning
-            if (!numSet.contains(num - 1)) {
+            if (!set.contains(num - 1)) { // Ensure we start only at sequence beginning
                 int length = 1;
-
-                // Step 3: Count the length of the consecutive sequence
-                while (numSet.contains(num + length)) {
+                while (set.contains(num + length)) {
                     length++;
                 }
-
-                // Update the longest streak
-                longestStreak = Math.max(longestStreak, length);
+                maxLength = Math.max(maxLength, length); // Update max sequence length
             }
         }
 
-        return longestStreak;
+        return maxLength;
     }
 
     public static void main(String[] args) {

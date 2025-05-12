@@ -2,34 +2,34 @@ package answers.b_two_pointers;
 
 public class B4ContainerWithMostWater {
     /**
+     * Key Techniques:
+     * ✅ Two-Pointer Approach → Expands and contracts dynamically for max area.
+     * ✅ O(n) Time Complexity → Single-pass optimization.
+     * ✅ O(1) Space Complexity → No extra storage required.
+     *
      * Time Complexity: O(n)
-     * - The two-pointer approach ensures each element is visited at most once, resulting in a linear time complexity.
+     * Each index is processed at most once, ensuring linear efficiency.
      *
      * Space Complexity: O(1)
-     * - The space complexity is constant because only a few integer variables are used, and no additional data structures are created.
+     * Uses only a few extra variables for tracking indices.
      */
     public static int maxArea(int[] height) {
-        int area = 0;
-        int left = 0;
-        int right = height.length - 1;
+        int left = 0, right = height.length - 1;
+        int maxArea = 0;
 
-        // Use two pointers to iterate through the array
         while (left < right) {
-            // Calculate the height and area of the container
-            int maxHeight = Math.min(height[left], height[right]);
-            area = Math.max(area, (right - left) * maxHeight);
+            int minHeight = Math.min(height[left], height[right]);
+            maxArea = Math.max(maxArea, minHeight * (right - left));
 
-            // Move the pointer with the smaller height
-            while (left < right && maxHeight >= height[left]) {
+            // Move the pointer at the shorter height to try increasing the area
+            if (height[left] < height[right]) {
                 left++;
-            }
-            while (left < right && maxHeight >= height[right]) {
+            } else {
                 right--;
             }
         }
 
-        // Return the maximum area found
-        return area;
+        return maxArea;
     }
 
     public static void main(String[] args) {

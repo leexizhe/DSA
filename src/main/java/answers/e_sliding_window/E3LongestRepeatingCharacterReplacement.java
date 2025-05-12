@@ -2,28 +2,35 @@ package answers.e_sliding_window;
 
 public class E3LongestRepeatingCharacterReplacement {
     /**
+     * Key Techniques:
+     * ✅ Sliding Window → Dynamically expands and contracts for efficiency.
+     * ✅ O(n) Time Complexity → Processes the string in a single pass.
+     * ✅ O(1) Space Complexity → Uses a fixed-size frequency array.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the length of the input string `s`.
-     * We use the sliding window technique to traverse the string while dynamically adjusting the window size.
+     * We traverse the string once, adjusting the window dynamically.
      *
      * Space Complexity: O(1)
-     * The space complexity is O(1), as we only use an array of fixed size (26) to track character frequencies.
+     * Uses a fixed-size array to track character frequencies.
      */
     public static int characterReplacement(String s, int k) {
-        int[] freq = new int[26];
-        int left = 0, maxFreq = 0, maxLength = 0;
+        if (s == null || s.length() == 0) return 0;
 
+        int[] freq = new int[26]; // Frequency array for tracking character counts
+        int maxCount = 0, left = 0, maxLength = 0;
+
+        // Step 1: Expand the right pointer and track character frequencies
         for (int right = 0; right < s.length(); right++) {
             freq[s.charAt(right) - 'A']++;
-            maxFreq = Math.max(maxFreq, freq[s.charAt(right) - 'A']);
+            maxCount = Math.max(maxCount, freq[s.charAt(right) - 'A']);
 
-            // Check if window size exceeds the allowed replacements
-            while (right - left + 1 - maxFreq > k) {
+            // Step 2: Shrink the window if replacements exceed allowed k
+            while ((right - left + 1) - maxCount > k) {
                 freq[s.charAt(left) - 'A']--;
-                left++;
+                left++; // Move left pointer forward
             }
 
-            maxLength = Math.max(maxLength, right - left + 1);
+            maxLength = Math.max(maxLength, right - left + 1); // Update max length
         }
 
         return maxLength;

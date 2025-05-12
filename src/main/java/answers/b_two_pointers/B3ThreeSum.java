@@ -6,52 +6,43 @@ import java.util.List;
 
 public class B3ThreeSum {
     /**
+     * Key Techniques:
+     * ✅ Sorting → Ensures efficient duplicate elimination.
+     * ✅ Two-Pointer Approach → Finds triplets without unnecessary iterations.
+     * ✅ O(n^2) Time Complexity → Optimized compared to brute-force O(n^3).
+     *
      * Time Complexity: O(n^2)
-     * - Sorting the array takes O(n log n).
-     * - The nested loop for finding triplets using two pointers takes O(n^2).
-     * - Therefore, the overall time complexity is O(n^2).
+     * The outer loop runs O(n), and the two-pointer approach runs O(n) inside it.
      *
      * Space Complexity: O(n)
-     * - The space complexity is O(n) due to the storage of the result list and the sorting operation.
+     * Stores triplet results in a list.
      */
-    private static List<List<Integer>> threeSum(int[] nums) {
-        // Step 1: Sort the array to simplify finding triplets
-        Arrays.sort(nums);
+    public static List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums); // Sort for two-pointer approach
 
-        // Step 2: Iterate through the array to find triplets
         for (int i = 0; i < nums.length - 2; i++) {
-            // Avoid duplicates for the current element
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            if (i > 0 && nums[i] == nums[i - 1]) continue; // Skip duplicate elements
 
-            // Initialize two pointers
-            int left = i + 1;
-            int right = nums.length - 1;
-
-            // Step 3: Find pairs that sum to the target (-nums[i])
+            int left = i + 1, right = nums.length - 1;
             while (left < right) {
                 int sum = nums[i] + nums[left] + nums[right];
-                if (sum > 0) {
-                    // If the sum is greater than 0, move the right pointer backward
+
+                if (sum == 0) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
                     right--;
+
+                    while (left < right && nums[left] == nums[left - 1]) left++; // Skip duplicate left values
+                    while (left < right && nums[right] == nums[right + 1]) right--; // Skip duplicate right values
                 } else if (sum < 0) {
-                    // If the sum is less than 0, move the left pointer forward
                     left++;
                 } else {
-                    // Add the triplet to the result list
-                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
-
-                    // Move the left pointer forward while avoiding duplicates
-                    while (left < right && nums[left] == nums[left + 1]) left++;
-                    // Move the right pointer backward while avoiding duplicates
-                    while (left < right && nums[right] == nums[right - 1]) right--;
-
-                    // Move both pointers to continue finding triplets
-                    left++;
                     right--;
                 }
             }
         }
+
         return result;
     }
 

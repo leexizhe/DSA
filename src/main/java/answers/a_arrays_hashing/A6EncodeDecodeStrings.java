@@ -6,45 +6,40 @@ import java.util.List;
 
 public class A6EncodeDecodeStrings {
     /**
+     * Key Techniques:
+     * ✅ Delimiter-based Encoding → Ensures reliable separation of words.
+     * ✅ O(n) Time Complexity → Efficient traversal for both encode and decode.
+     * ✅ O(n) Space Complexity → Stores encoded/decrypted results.
+     *
      * Time Complexity: O(n)
-     * - Encoding: Constructing the encoded string takes O(n), where `n` is the total number of characters across all strings.
-     * - Decoding: Splitting and parsing the encoded string also takes O(n).
+     * Each character is processed once for encoding and decoding.
      *
      * Space Complexity: O(n)
-     * - The space complexity is O(n) because of the additional space required to store the encoded or decoded strings.
+     * Stores encoded and decoded results efficiently.
      */
-
-    // Encodes a list of strings to a single string
+    // Step 1: Encode list of strings into a single string with length prefix
     public static String encode(List<String> strs) {
-        StringBuilder encoded = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (String str : strs) {
-            // Prefix each string with its length and a delimiter (e.g., ":")
-            encoded.append(str.length()).append("#").append(str);
+            sb.append(str.length()).append("#").append(str); // Length#String
         }
-        return encoded.toString();
+        return sb.toString();
     }
 
-    // Decodes a single string to a list of strings
+    // Step 2: Decode the single string back into original list
     public static List<String> decode(String s) {
-        List<String> decoded = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         int i = 0;
 
         while (i < s.length()) {
-            // Read the length of the string up to the delimiter ("#")
-            int delimiter = i;
-            while (s.charAt(delimiter) != '#') {
-                delimiter++;
-            }
-            int length = Integer.parseInt(s.substring(i, delimiter));
-            i = delimiter + 1;
-
-            // Extract the actual string of the given length
-            String str = s.substring(i, i + length);
-            decoded.add(str);
-            i += length; // Move the pointer forward
+            int delimiterIndex = s.indexOf("#", i);
+            int length = Integer.parseInt(s.substring(i, delimiterIndex));
+            i = delimiterIndex + 1;
+            result.add(s.substring(i, i + length));
+            i += length; // Move pointer forward
         }
 
-        return decoded;
+        return result;
     }
 
     public static void main(String[] args) {

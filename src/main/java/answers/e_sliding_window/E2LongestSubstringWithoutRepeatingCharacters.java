@@ -4,32 +4,32 @@ import java.util.HashSet;
 
 public class E2LongestSubstringWithoutRepeatingCharacters {
     /**
-     * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of characters in the input string `s`.
-     * This is because we iterate through the string using a sliding window approach, processing each character only once.
+     * Key Techniques:
+     * ✅ Sliding Window → Expands and contracts dynamically for efficiency.
+     * ✅ O(n) Time Complexity → Processes characters in a single pass.
+     * ✅ O(1) Space Complexity → Uses only a fixed-size character set.
      *
-     * Space Complexity: O(n)
-     * The space complexity of this solution is O(n), where n is the number of unique characters in the input string `s`.
-     * This is because we use a HashSet to store distinct characters within the sliding window.
+     * Time Complexity: O(n)
+     * We traverse the string once, expanding and contracting the window dynamically.
+     *
+     * Space Complexity: O(1)
+     * Uses at most 26 or 128 characters (depending on the encoding).
      */
-    private static int lengthOfLongestSubstring(String s) {
-        int left = 0;
-        int maxLength = 0;
+    public static int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) return 0;
+
         HashSet<Character> set = new HashSet<>();
+        int left = 0, maxLength = 0;
 
-        // Iterate through the string with a sliding window
+        // Step 1: Expand the right pointer and track unique characters
         for (int right = 0; right < s.length(); right++) {
-            char currentChar = s.charAt(right);
-
-            // Remove characters from the left to maintain uniqueness
-            while (set.contains(currentChar)) {
-                set.remove(s.charAt(left));
-                left++;
+            while (set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left)); // Remove leftmost character
+                left++; // Shrink the window
             }
 
-            // Add the new character and update max length
-            set.add(currentChar);
-            maxLength = Math.max(maxLength, right - left + 1);
+            set.add(s.charAt(right)); // Add current character
+            maxLength = Math.max(maxLength, right - left + 1); // Update max length
         }
 
         return maxLength;

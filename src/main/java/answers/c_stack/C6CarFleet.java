@@ -3,37 +3,43 @@ package answers.c_stack;
 import java.util.Arrays;
 
 public class C6CarFleet {
+
     /**
+     * Key Techniques:
+     * ✅ Sorting → Ensures cars are processed in descending order.
+     * ✅ Stack Simulation → Tracks fleets dynamically.
+     * ✅ O(n log n) Time Complexity → Sorting dominates runtime.
+     *
      * Time Complexity: O(n log n)
-     * The time complexity of this solution is O(n log n) due to the sorting step.
-     * The following iteration through cars is O(n), making the overall complexity O(n log n).
+     * Sorting the positions ensures efficient fleet processing.
      *
      * Space Complexity: O(n)
-     * The space complexity of this solution is O(n) since we store position-speed pairs in an auxiliary array.
+     * Stores all fleet time calculations.
      */
-    private static int carFleet(int target, int[] position, int[] speed) {
+    public static int carFleet(int target, int[] position, int[] speed) {
         int n = position.length;
-        double[][] cars = new double[n][2];
+        if (n == 0) return 0;
 
-        // Step 1: Store positions and times to reach target
+        double[][] cars = new double[n][2]; // Store position and time to reach target
         for (int i = 0; i < n; i++) {
-            cars[i] = new double[] {position[i], (double) (target - position[i]) / speed[i]};
+            cars[i][0] = position[i];
+            cars[i][1] = (double) (target - position[i]) / speed[i];
         }
 
-        // Step 2: Sort cars by position (farthest to closest)
-        Arrays.sort(cars, (a, b) -> Double.compare(b[0], a[0]));
+        Arrays.sort(cars, (a, b) -> Double.compare(b[0], a[0])); // Sort by position descending
 
-        // Step 3: Count fleets using a greedy approach
         int fleets = 0;
-        double lastArrival = 0;
+        double lastFleetTime = 0;
 
+        // Step 1: Traverse sorted cars and form fleets
         for (double[] car : cars) {
-            double arrivalTime = car[1];
-            if (arrivalTime > lastArrival) {
+            double time = car[1];
+            if (time > lastFleetTime) {
                 fleets++;
-                lastArrival = arrivalTime;
+                lastFleetTime = time; // New fleet begins
             }
         }
+
         return fleets;
     }
 

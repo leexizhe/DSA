@@ -2,36 +2,37 @@ package answers.d_binary_search;
 
 public class D5SearchInRotatedSortedArray {
     /**
+     * Key Techniques:
+     * ✅ Binary Search → Efficiently finds target in a rotated array.
+     * ✅ O(log n) Time Complexity → Continuously halves the search space.
+     * ✅ O(1) Space Complexity → Performs in-place modifications.
+     *
      * Time Complexity: O(log n)
-     * The time complexity of this solution is O(log n), where `n` is the number of elements in the array.
-     * We use binary search, reducing the search space by half in each iteration.
+     * We reduce the search space logarithmically by comparing midpoints.
      *
      * Space Complexity: O(1)
-     * The space complexity is O(1) since we only use a few integer variables.
+     * No extra storage is required beyond index tracking.
      */
     public static int search(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
+        int left = 0, right = nums.length - 1;
 
         while (left <= right) {
             int mid = left + (right - left) / 2;
 
-            if (nums[mid] == target) {
-                return mid;
-            }
+            if (nums[mid] == target) return mid;
 
-            // Determine which half is sorted
+            // Step 1: Determine which half is sorted
             if (nums[left] <= nums[mid]) { // Left half is sorted
                 if (target >= nums[left] && target < nums[mid]) {
-                    right = mid - 1; // Search left half
+                    right = mid - 1; // Search in left sorted half
                 } else {
-                    left = mid + 1; // Search right half
+                    left = mid + 1; // Search in right half
                 }
             } else { // Right half is sorted
                 if (target > nums[mid] && target <= nums[right]) {
-                    left = mid + 1; // Search right half
+                    left = mid + 1; // Search in right sorted half
                 } else {
-                    right = mid - 1; // Search left half
+                    right = mid - 1; // Search in left half
                 }
             }
         }

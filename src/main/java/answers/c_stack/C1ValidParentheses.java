@@ -1,42 +1,38 @@
 package answers.c_stack;
 
-import java.util.HashMap;
 import java.util.Stack;
 
 public class C1ValidParentheses {
     /**
+     * Key Techniques:
+     * ✅ Stack → Efficiently tracks opening brackets.
+     * ✅ O(n) Time Complexity → Single-pass validation.
+     * ✅ O(n) Space Complexity → Stores unmatched brackets in worst-case.
+     *
      * Time Complexity: O(n)
-     * - The algorithm iterates through the string once, processing each character in O(1) time.
-     * - Therefore, the overall time complexity is O(n).
+     * We iterate through the string once, processing each character efficiently.
      *
      * Space Complexity: O(n)
-     * - In the worst case, the stack stores all opening brackets, requiring O(n) space.
+     * In the worst case (all open brackets), we use O(n) stack space.
      */
-    private static boolean isValid(String s) {
-        // Step 1: Create a mapping of closing to opening brackets
-        HashMap<Character, Character> map = new HashMap<>();
-        map.put(')', '(');
-        map.put(']', '[');
-        map.put('}', '{');
-
-        // Step 2: Use a stack to track opening brackets
+    public static boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
 
-        // Step 3: Iterate through the characters in the string
+        // Step 1: Process each character in the string
         for (char c : s.toCharArray()) {
-            if (map.containsKey(c)) {
-                // Check if the stack is empty or if the top element does not match the expected opening bracket
-                if (stack.isEmpty() || stack.pop() != map.get(c)) {
-                    return false;
-                }
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c); // Push opening brackets
             } else {
-                // Push opening brackets onto the stack
-                stack.push(c);
+                if (stack.isEmpty()) return false; // Unmatched closing bracket
+
+                char top = stack.pop();
+                if ((c == ')' && top != '(') || (c == '}' && top != '{') || (c == ']' && top != '[')) {
+                    return false; // Mismatched brackets
+                }
             }
         }
 
-        // Step 4: If the stack is empty, the parentheses are valid
-        return stack.isEmpty();
+        return stack.isEmpty(); // Valid only if no unmatched brackets remain
     }
 
     public static void main(String[] args) {

@@ -4,20 +4,25 @@ import java.util.Stack;
 
 public class C7LargestRectangleInHistogram {
     /**
+     * Key Techniques:
+     * ✅ Monotonic Increasing Stack → Tracks previous heights efficiently.
+     * ✅ O(n) Time Complexity → Each bar is pushed and popped once.
+     * ✅ O(n) Space Complexity → Worst-case stack storage.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of elements in the input array `heights`.
-     * This is because each element is processed at most twice—once pushed and once popped from the stack—making the operations linear.
+     * Each height is processed once, ensuring optimal performance.
      *
      * Space Complexity: O(n)
-     * The space complexity of this solution is O(n), since we use a stack to store indices of histogram bars.
-     * In the worst case, all elements may be stored in the stack.
+     * Worst case occurs when stack holds all histogram bars.
      */
-    private static int largestRectangleArea(int[] heights) {
-        Stack<Integer> stack = new Stack<>();
+    public static int largestRectangleArea(int[] heights) {
         int maxArea = 0;
+        Stack<Integer> stack = new Stack<>();
+        int n = heights.length;
 
-        for (int i = 0; i <= heights.length; i++) {
-            int h = (i == heights.length) ? 0 : heights[i]; // Handle last element safely
+        // Step 1: Iterate through heights, maintaining a monotonic increasing stack
+        for (int i = 0; i <= n; i++) {
+            int h = (i == n) ? 0 : heights[i];
 
             while (!stack.isEmpty() && h < heights[stack.peek()]) {
                 int height = heights[stack.pop()];

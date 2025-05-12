@@ -6,13 +6,17 @@ import java.util.*;
 
 public class A5TopKFrequentElements {
     /**
+     * Key Techniques:
+     * ✅ HashMap → Efficiently counts element frequencies.
+     * ✅ Bucket Sort → Groups elements based on frequency.
+     * ✅ O(n) Time Complexity → Avoids expensive sorting or heap operations.
+     *
      * Time Complexity: O(n)
-     * - Counting the frequency of elements takes O(n), where `n` is the number of elements in the array `nums`.
-     * - Placing elements into buckets and retrieving the top k frequent elements both take O(n).
-     * - The total time complexity is O(n), as no sorting or heap operations are required.
+     * - Counting frequencies takes O(n).
+     * - Bucket sorting ensures efficient grouping.
      *
      * Space Complexity: O(n)
-     * - The space complexity is O(n) because of the HashMap and the bucket list, which together grow linearly with the input size.
+     * Stores element frequencies and bucket data efficiently.
      */
     private static int[] topKFrequent(int[] nums, int k) {
         // Step 1: Count the frequency of each element

@@ -4,33 +4,35 @@ import static common.PrintArray.printArray;
 
 public class A7ProductOfArrayExceptSelf {
     /**
-     * Time Complexity: O(n)
-     * - The array is traversed twice, once from left to right and once from right to left. Each traversal takes O(n).
-     * - Therefore, the overall time complexity is O(n).
+     * Key Techniques:
+     * ✅ Prefix & Suffix Products → Avoids division operation.
+     * ✅ O(n) Time Complexity → Efficient single-pass computation.
+     * ✅ O(1) Space Complexity → Uses output array for in-place calculations.
      *
-     * Space Complexity: O(1) (excluding the output array)
-     * - No additional arrays or data structures are used beyond the result array and a few integer variables.
-     * - Thus, the space complexity is O(1).
+     * Time Complexity: O(n)
+     * Two passes ensure efficient traversal without redundant computation.
+     *
+     * Space Complexity: O(1)
+     * Uses output array for in-place product calculations.
      */
     public static int[] productExceptSelf(int[] nums) {
-        int left = 1;
-        int right = 1;
-        int length = nums.length;
-        int[] array = new int[length];
+        int n = nums.length;
+        int[] result = new int[n];
 
-        // Step 1: Calculate the left products and store them in `array`
-        for (int i = 0; i < length; i++) {
-            array[i] = left; // Store the cumulative product from the left
-            left *= nums[i]; // Update `left` to include nums[i]
+        // Step 1: Compute prefix products
+        result[0] = 1;
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
         }
 
-        // Step 2: Calculate the right products and multiply with the existing values in `array`
-        for (int i = length - 1; i >= 0; i--) {
-            array[i] *= right; // Multiply the cumulative product from the right
-            right *= nums[i]; // Update `right` to include nums[i]
+        // Step 2: Compute suffix products in-place
+        int suffix = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] *= suffix; // Multiply with suffix product
+            suffix *= nums[i]; // Update suffix
         }
 
-        return array;
+        return result;
     }
 
     public static void main(String[] args) {

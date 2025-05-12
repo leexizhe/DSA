@@ -1,58 +1,40 @@
 package answers.d_binary_search;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.TreeMap;
 
 public class D6TimeBasedKeyValueStore {
     /**
+     * Key Techniques:
+     * ✅ HashMap + TreeMap → Ensures efficient insertion and retrieval.
+     * ✅ O(log n) Time Complexity → Binary search on timestamps.
+     * ✅ O(n) Space Complexity → Stores all values efficiently.
+     *
      * Time Complexity:
-     * - `set(key, value, timestamp)`: O(1), as inserting into a HashMap and List is constant time.
-     * - `get(key, timestamp)`: O(log n), using binary search on the stored timestamps.
+     * - `set()` → O(1) (Direct insertion into TreeMap)
+     * - `get()` → O(log n) (Binary search on timestamp values)
      *
      * Space Complexity: O(n)
-     * - We store key-value pairs along with timestamps, leading to linear space usage.
+     * Stores all key-value pairs efficiently.
      */
     static class TimeMap {
-        private HashMap<String, List<Pair>> map;
+        private HashMap<String, TreeMap<Integer, String>> map;
 
         public TimeMap() {
             map = new HashMap<>();
         }
 
         public void set(String key, String value, int timestamp) {
-            map.computeIfAbsent(key, k -> new ArrayList<>()).add(new Pair(timestamp, value));
+            map.computeIfAbsent(key, k -> new TreeMap<>()).put(timestamp, value);
         }
 
         public String get(String key, int timestamp) {
             if (!map.containsKey(key)) return "";
 
-            List<Pair> pairs = map.get(key);
-            int left = 0;
-            int right = pairs.size() - 1;
-            String result = "";
+            TreeMap<Integer, String> timeMap = map.get(key);
+            Integer floorKey = timeMap.floorKey(timestamp);
 
-            while (left <= right) {
-                int mid = left + (right - left) / 2;
-                if (pairs.get(mid).timestamp <= timestamp) {
-                    result = pairs.get(mid).value;
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
-            }
-
-            return result;
-        }
-    }
-
-    static class Pair {
-        int timestamp;
-        String value;
-
-        public Pair(int timestamp, String value) {
-            this.timestamp = timestamp;
-            this.value = value;
+            return floorKey != null ? timeMap.get(floorKey) : "";
         }
     }
 

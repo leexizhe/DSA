@@ -6,35 +6,31 @@ import java.util.HashMap;
 
 public class A3TwoSum {
     /**
+     * Key Techniques:
+     * ✅ HashMap → Enables constant-time lookup for complements.
+     * ✅ O(n) Time Complexity → Single-pass solution.
+     * ✅ O(n) Space Complexity → Stores key-value pairs efficiently.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of elements in the input array `nums`.
-     * This is because we iterate through the array only once, and each lookup and insertion operation in the HashMap takes O(1) time on average.
+     * Each element is processed once, ensuring linear efficiency.
      *
      * Space Complexity: O(n)
-     * The space complexity of this solution is O(n), where n is the number of elements in the input array `nums`.
-     * This is because we store at most n elements in the HashMap.
+     * Stores distinct elements in a hash map.
      */
-    private static int[] twoSum(int[] nums, int target) {
-        // Create a HashMap to store numbers and their indices
+    public static int[] twoSum(int[] nums, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
 
-        // Loop through the array
         for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            int diff = target - num; // Calculate the difference needed to meet the target
+            int diff = target - nums[i];
 
-            // Check if the required difference exists in the map
             if (map.containsKey(diff)) {
-                // If it exists, return the indices of the two numbers
-                return new int[] {map.get(diff), i};
+                return new int[] {map.get(diff), i}; // Found pair
             }
 
-            // Otherwise, add the current number and its index to the map
-            map.put(num, i);
+            map.put(nums[i], i); // Store index of current number
         }
 
-        // Return an empty array if no solution is found
-        return new int[0];
+        return new int[] {-1, -1}; // No valid pair found
     }
 
     public static void main(String[] args) {

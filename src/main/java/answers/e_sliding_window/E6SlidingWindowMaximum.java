@@ -7,36 +7,38 @@ import java.util.LinkedList;
 
 public class E6SlidingWindowMaximum {
     /**
+     * Key Techniques:
+     * ✅ Monotonic Deque → Efficiently maintains max values in the window.
+     * ✅ O(n) Time Complexity → Processes elements in a single pass.
+     * ✅ O(k) Space Complexity → Stores at most k elements in the deque.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of elements in the input array `nums`.
-     * We iterate through the array only once, and each element is added and removed from the deque at most once.
+     * Each element is added and removed from the deque at most once, making it linear.
      *
      * Space Complexity: O(k)
-     * The space complexity is O(k), where k is the size of the sliding window.
-     * The deque stores at most k elements at any given time.
+     * The deque holds at most k elements, reducing unnecessary storage.
      */
     public static int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums == null || k <= 0) return new int[0];
+        if (nums.length == 0 || k == 0) return new int[0];
 
-        int n = nums.length;
-        int[] result = new int[n - k + 1];
+        int[] result = new int[nums.length - k + 1];
         Deque<Integer> deque = new LinkedList<>();
 
+        // Step 1: Iterate through the array while maintaining a monotonic deque
         for (int i = 0; i < nums.length; i++) {
-            // Remove elements outside the window
+            // Remove elements that are out of the window range
             if (!deque.isEmpty() && deque.peekFirst() < i - k + 1) {
                 deque.pollFirst();
             }
 
-            // Remove elements from the back that are smaller than the current element
-            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+            // Maintain decreasing order in deque by removing smaller values
+            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
                 deque.pollLast();
             }
 
-            // Add current index to the deque
-            deque.offerLast(i);
+            deque.addLast(i);
 
-            // Store result when the window reaches size k
+            // Step 2: Record max value once we have processed at least k elements
             if (i >= k - 1) {
                 result[i - k + 1] = nums[deque.peekFirst()];
             }

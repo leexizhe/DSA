@@ -4,33 +4,39 @@ import java.util.Arrays;
 
 public class E4PermutationInString {
     /**
+     * Key Techniques:
+     * ✅ Sliding Window → Efficient substring scanning.
+     * ✅ O(n) Time Complexity → Single traversal of both strings.
+     * ✅ O(1) Space Complexity → Uses fixed-size character frequency arrays.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the length of the input string `s2`.
-     * We slide a window of size `s1.length()` across `s2`, updating character frequencies dynamically.
+     * We process `s2` once while maintaining frequency tracking, making it linear.
      *
      * Space Complexity: O(1)
-     * The space complexity is O(1) because we only use two fixed-size arrays (26 elements each) to track character frequencies.
+     * Fixed-size character arrays for frequency tracking ensure constant space usage.
      */
     public static boolean checkInclusion(String s1, String s2) {
         if (s1.length() > s2.length()) return false;
 
         int[] s1Freq = new int[26];
-        int[] windowFreq = new int[26];
+        int[] s2Freq = new int[26];
 
-        for (char c : s1.toCharArray()) s1Freq[c - 'a']++;
+        // Step 1: Populate frequency array for s1
+        for (char c : s1.toCharArray()) {
+            s1Freq[c - 'a']++;
+        }
 
-        int left = 0;
-        for (int right = 0; right < s2.length(); right++) {
-            windowFreq[s2.charAt(right) - 'a']++;
+        // Step 2: Iterate through s2 using a sliding window of length s1
+        for (int i = 0; i < s2.length(); i++) {
+            s2Freq[s2.charAt(i) - 'a']++; // Add current character
 
-            // Maintain a window of size s1.length()
-            if (right - left + 1 > s1.length()) {
-                windowFreq[s2.charAt(left) - 'a']--;
-                left++;
+            // Remove the leftmost character when window exceeds s1 length
+            if (i >= s1.length()) {
+                s2Freq[s2.charAt(i - s1.length()) - 'a']--;
             }
 
-            // Compare frequency arrays
-            if (Arrays.equals(s1Freq, windowFreq)) return true;
+            // Step 3: Check if frequency arrays match (valid permutation)
+            if (Arrays.equals(s1Freq, s2Freq)) return true;
         }
 
         return false;

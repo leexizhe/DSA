@@ -2,12 +2,16 @@ package answers.d_binary_search;
 
 public class D3KokoEatingBananas {
     /**
-     * Time Complexity: O(n log m)
-     * The time complexity of this solution is O(n log m), where `n` is the number of piles and `m` is the maximum pile size.
-     * We apply binary search on `m`, iterating through piles in each search step.
+     * Key Techniques:
+     * ✅ Binary Search on Eating Speed → Efficiently finds the minimum speed Koko needs.
+     * ✅ O(log(maxPile) * n) Time Complexity → Optimally searches within speed constraints.
+     * ✅ O(1) Space Complexity → Performs in-place calculations.
+     *
+     * Time Complexity: O(n log maxPile)
+     * We apply binary search on the possible speeds, each check taking O(n).
      *
      * Space Complexity: O(1)
-     * The space complexity of this solution is O(1) because we do not use additional data structures aside from a few integer variables.
+     * Uses only a few extra variables for search tracking.
      */
     public static int minEatingSpeed(int[] piles, int h) {
         int left = 1;

@@ -6,24 +6,29 @@ import java.util.Stack;
 
 public class C5DailyTemperatures {
     /**
+     * Key Techniques:
+     * ✅ Monotonic Decreasing Stack → Tracks indices of previous temperatures.
+     * ✅ O(n) Time Complexity → Each index is pushed and popped at most once.
+     * ✅ O(n) Space Complexity → Worst-case stack storage when no warmer days appear.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of elements in the input array `temperatures`.
-     * This is because each element is pushed onto the stack at most once and popped at most once, making the operations linear.
+     * Each element is processed once, optimizing performance.
      *
      * Space Complexity: O(n)
-     * The space complexity of this solution is O(n), as we use a stack to store indices of temperatures.
-     * In the worst case, we store all the elements in the stack.
+     * Worst case is storing all elements when temperatures never increase.
      */
-    private static int[] dailyTemperatures(int[] temperatures) {
-        int[] result = new int[temperatures.length];
+    public static int[] dailyTemperatures(int[] temperatures) {
+        int n = temperatures.length;
+        int[] result = new int[n];
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 0; i < temperatures.length; i++) {
+        // Step 1: Traverse the temperatures array
+        for (int i = 0; i < n; i++) {
             while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
                 int index = stack.pop();
-                result[index] = i - index; // Calculate the number of days until a warmer temperature
+                result[index] = i - index; // Calculate days until warmer temperature
             }
-            stack.push(i);
+            stack.push(i); // Store current index
         }
 
         return result;

@@ -4,18 +4,20 @@ import static common.PrintArray.printArray;
 
 public class D1BinarySearch {
     /**
+     * Key Techniques:
+     * ✅ Divide and Conquer → Efficiently reduces search space.
+     * ✅ O(log n) Time Complexity → Iteratively halves the search space.
+     * ✅ O(1) Space Complexity → Performs in-place searches without extra memory.
+     *
      * Time Complexity: O(log n)
-     * The time complexity of this solution is O(log n), where n is the number of elements in the input array `nums`.
-     * This is because in each iteration, the search space is reduced by half.
+     * We repeatedly halve the array, making the solution logarithmic.
      *
      * Space Complexity: O(1)
-     * The space complexity of this solution is O(1), since no extra storage is used, only a few variables.
+     * Uses only a few extra variables for search tracking.
      */
     private static int search(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
+        int left = 0, right = nums.length - 1;
 
-        // Perform binary search
         while (left <= right) {
             int mid = left + (right - left) / 2; // Avoid integer overflow
             if (nums[mid] > target) {
@@ -27,7 +29,7 @@ public class D1BinarySearch {
             }
         }
 
-        return -1; // Element not found
+        return -1; // Target not found
     }
 
     public static void main(String[] args) {

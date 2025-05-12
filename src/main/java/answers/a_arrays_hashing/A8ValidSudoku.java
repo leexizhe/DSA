@@ -1,38 +1,36 @@
 package answers.a_arrays_hashing;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class A8ValidSudoku {
     /**
+     * Key Techniques:
+     * ✅ HashSet → Tracks seen numbers for efficient validation.
+     * ✅ O(1) Time Complexity → Fixed 9x9 board ensures constant processing.
+     * ✅ O(1) Space Complexity → Uses a limited number of hash sets.
+     *
      * Time Complexity: O(1)
-     * - The board has a fixed size of 9x9 (81 cells), so the number of operations is constant.
-     * - Each cell is processed once, and hash set operations (like `add`) are O(1).
+     * Since the board is fixed at 9x9, operations remain constant.
      *
      * Space Complexity: O(1)
-     * - The `HashSet` stores a constant number of entries (unique combinations of row, column, and sub-box constraints).
-     * - Since the board size is fixed, space usage does not grow.
+     * Uses a few HashSets for tracking digits efficiently.
      */
     public static boolean isValidSudoku(char[][] board) {
-        Set<String> seen = new HashSet<>();
+        HashSet<String> seen = new HashSet<>();
 
-        // Traverse the board
-        for (int i = 0; i < 9; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                char number = board[i][j];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char num = board[i][j];
+                if (num == '.') continue; // Skip empty cells
 
-                // Skip empty cells
-                // Add constraints to the set
-                if (number != '.'
-                        && (!seen.add(number + " in row " + i)
-                                || !seen.add(number + " in column " + j)
-                                || !seen.add(number + " in block " + (i / 3) + "-" + (j / 3)))) {
-                    return false; // If any constraint is violated, return false
+                // Track numbers for row, column, and box
+                if (!seen.add(num + " in row " + i)
+                        || !seen.add(num + " in col " + j)
+                        || !seen.add(num + " in box " + (i / 3) + "-" + (j / 3))) {
+                    return false; // Duplicate found
                 }
             }
         }
-
-        // If no violations, the board is valid
         return true;
     }
 

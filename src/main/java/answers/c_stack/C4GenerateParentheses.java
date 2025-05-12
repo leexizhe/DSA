@@ -5,34 +5,34 @@ import java.util.List;
 
 public class C4GenerateParentheses {
     /**
-     * Time Complexity: O(2^n)
-     * - The recursive backtracking approach generates all valid parentheses combinations.
-     * - Given that each position can be an opening or closing bracket, the complexity is exponential.
+     * Key Techniques:
+     * ✅ Backtracking → Efficiently builds valid sequences.
+     * ✅ O(4^n / sqrt(n)) Time Complexity → Based on Catalan number complexity.
+     * ✅ O(n) Space Complexity → Recursive stack depth scales with n.
+     *
+     * Time Complexity: O(4^n / sqrt(n))
+     * The complexity is derived from the number of valid sequences that can be generated.
      *
      * Space Complexity: O(n)
-     * - The space complexity is O(n) due to storing intermediate results in the recursive call stack.
+     * The recursion stack depth scales with the number of pairs `n`.
      */
     public static List<String> generateParenthesis(int n) {
-        List<String> list = new ArrayList<>();
-        backtrack(list, "", 0, 0, n);
-        return list;
+        List<String> result = new ArrayList<>();
+        backtrack(result, "", 0, 0, n);
+        return result;
     }
 
-    private static void backtrack(List<String> list, String str, int open, int close, int max) {
-        // Base case: If current string length matches required length, add to result
-        if (str.length() == max * 2) {
-            list.add(str);
+    private static void backtrack(List<String> result, String current, int open, int close, int max) {
+        if (current.length() == max * 2) {
+            result.add(current);
             return;
         }
 
-        // Add an open parenthesis if count permits
         if (open < max) {
-            backtrack(list, str + "(", open + 1, close, max);
+            backtrack(result, current + "(", open + 1, close, max);
         }
-
-        // Add a close parenthesis if valid
         if (close < open) {
-            backtrack(list, str + ")", open, close + 1, max);
+            backtrack(result, current + ")", open, close + 1, max);
         }
     }
 

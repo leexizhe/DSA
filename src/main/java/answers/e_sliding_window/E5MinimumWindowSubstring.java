@@ -4,59 +4,56 @@ import java.util.HashMap;
 
 public class E5MinimumWindowSubstring {
     /**
+     * Key Techniques:
+     * ✅ Sliding Window → Expands and contracts dynamically to find the minimum window.
+     * ✅ HashMap for Frequency Tracking → Ensures efficient character matching.
+     * ✅ O(n) Time Complexity → Processes the string in a single pass.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the length of the input string `s`.
-     * The sliding window ensures we efficiently track character frequencies while minimizing redundant checks.
+     * We expand and contract the window dynamically, avoiding brute-force O(n²) checks.
      *
      * Space Complexity: O(1)
-     * The space complexity is O(1) since we only store character frequencies in fixed-size HashMaps (limited to 26 characters for lowercase).
+     * Uses a fixed-size hash map for character frequency tracking.
      */
     public static String minWindow(String s, String t) {
-        if (t.length() > s.length()) return "";
+        if (s.length() < t.length()) return "";
 
-        // Store frequency count of characters in t
         HashMap<Character, Integer> targetFreq = new HashMap<>();
         for (char c : t.toCharArray()) {
             targetFreq.put(c, targetFreq.getOrDefault(c, 0) + 1);
         }
 
-        // Sliding window variables
-        int left = 0, matchedChars = 0, minLen = Integer.MAX_VALUE, startIndex = 0;
+        int left = 0, matched = 0, minLength = Integer.MAX_VALUE, startIndex = 0;
         HashMap<Character, Integer> windowFreq = new HashMap<>();
 
-        // Expand the window by moving the right pointer
+        // Step 1: Expand the right pointer and track character frequency
         for (int right = 0; right < s.length(); right++) {
             char rightChar = s.charAt(right);
             windowFreq.put(rightChar, windowFreq.getOrDefault(rightChar, 0) + 1);
 
-            // If character frequency matches, increment matched count
             if (targetFreq.containsKey(rightChar) && windowFreq.get(rightChar).equals(targetFreq.get(rightChar))) {
-                matchedChars++;
+                matched++;
             }
 
-            // Shrink the window when all required characters are matched
-            while (matchedChars == targetFreq.size()) {
-                // Update minimum substring length
-                if (right - left + 1 < minLen) {
-                    minLen = right - left + 1;
+            // Step 2: Contract the window when all required characters are matched
+            while (matched == targetFreq.size()) {
+                if (right - left + 1 < minLength) {
+                    minLength = right - left + 1;
                     startIndex = left;
                 }
 
-                // Reduce the count of leftmost character
                 char leftChar = s.charAt(left);
                 windowFreq.put(leftChar, windowFreq.get(leftChar) - 1);
 
-                // If a required character count drops below target, decrement matched count
                 if (targetFreq.containsKey(leftChar) && windowFreq.get(leftChar) < targetFreq.get(leftChar)) {
-                    matchedChars--;
+                    matched--;
                 }
 
                 left++; // Move left pointer forward
             }
         }
 
-        // Return shortest valid substring or empty if none found
-        return minLen == Integer.MAX_VALUE ? "" : s.substring(startIndex, startIndex + minLen);
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(startIndex, startIndex + minLength);
     }
 
     public static void main(String[] args) {
