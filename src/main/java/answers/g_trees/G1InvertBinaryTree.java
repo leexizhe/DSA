@@ -4,13 +4,17 @@ import static answers.g_trees.TreePrinter.printTree;
 
 public class G1InvertBinaryTree {
     /**
+     * Key Techniques:
+     * ✅ Recursion → Simplifies tree traversal logic.
+     * ✅ O(n) Time Complexity → Efficiently processes all nodes.
+     * ✅ Works on Skewed & Balanced Trees → Handles diverse tree structures effectively.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of nodes in the binary tree.
-     * We traverse each node once, swapping the left and right children.
+     * We traverse each node exactly once, making the solution linear in time.
      *
      * Space Complexity: O(h)
-     * The space complexity is O(h), where h is the height of the tree.
-     * This accounts for recursive function calls in the worst case (O(n) for a skewed tree, O(log n) for a balanced tree).
+     * The recursive call stack consumes space proportional to the tree’s height.
+     * In the worst case (skewed tree), this is O(n), and in the best case (balanced tree), it is O(log n).
      */
     public static TreeNode invertTree(TreeNode root) {
         if (root == null) return null;
@@ -40,9 +44,7 @@ public class G1InvertBinaryTree {
         printTree(root);
         System.out.println();
 
-        root = invertTree(root);
-
         System.out.println("Inverted Tree:");
-        printTree(root);
+        printTree(invertTree(root));
     }
 }

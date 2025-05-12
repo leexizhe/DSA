@@ -4,12 +4,16 @@ import static answers.f_linked_list.PrintLinkedList.printLinkedList;
 
 public class F2MergeTwoSortedLinkedLists {
     /**
+     * Key Techniques:
+     * ✅ Iterative Approach → Straightforward and efficient.
+     * ✅ O(n) Time Complexity → Processes both lists in a single pass.
+     * ✅ O(1) Space Complexity → No extra memory usage beyond pointers.
+     *
      * Time Complexity: O(n + m)
-     * The time complexity of this solution is O(n + m), where n and m are the number of nodes in the two linked lists.
-     * This is because we traverse both lists once to merge them.
+     * We traverse both linked lists once, making the solution linear in time.
      *
      * Space Complexity: O(1)
-     * The space complexity of this solution is O(1), since we modify the original lists without using additional storage.
+     * Since we modify pointers in place, we use constant extra space.
      */
     private static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(-1); // Dummy node to simplify merging logic

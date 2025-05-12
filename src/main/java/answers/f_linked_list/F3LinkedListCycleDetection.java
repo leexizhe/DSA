@@ -5,12 +5,16 @@ import java.util.HashSet;
 public class F3LinkedListCycleDetection {
 
     /**
+     * Key Techniques:
+     * ✅ Floyd’s Cycle Detection Algorithm → Efficient for detecting cycles.
+     * ✅ O(n) Time Complexity → Only requires a single pass.
+     * ✅ O(1) Space Complexity → No extra memory usage.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of nodes in the linked list.
-     * This is because we traverse the list once using the slow and fast pointers.
+     * We traverse the linked list once, making it linear in time.
      *
      * Space Complexity: O(1)
-     * The space complexity of this solution is O(1), as we use only two pointers without extra storage.
+     * Since we only use two pointers, we require constant extra space.
      */
     private static boolean hasCycle(ListNode head) {
         if (head == null) return false;
@@ -29,13 +33,16 @@ public class F3LinkedListCycleDetection {
     }
 
     /**
+     * Key Techniques:
+     * ✅ HashSet for Tracking → Detects cycles by storing visited nodes.
+     * ✅ O(n) Time Complexity → Traverses the list once.
+     * ✅ O(n) Space Complexity → Uses extra memory proportional to the list size.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of nodes in the linked list.
-     * This is because each node is visited once and stored in the HashSet before checking for duplicates.
+     * We iterate through the linked list, storing each node, making it linear in time.
      *
      * Space Complexity: O(n)
-     * The space complexity of this solution is O(n), as we store each visited node in a HashSet.
-     * In the worst case, all nodes are unique and must be stored.
+     * We store up to n nodes in the HashSet, leading to linear space usage.
      */
     public static boolean hasCycle2(ListNode head) {
         // Step 1: Edge case - If the list is empty, return false

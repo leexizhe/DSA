@@ -4,12 +4,16 @@ import static answers.f_linked_list.PrintLinkedList.printLinkedList;
 
 public class F1ReverseLinkedList {
     /**
+     * Key Techniques:
+     * ✅ Iterative Approach → Simple and easy to understand.
+     * ✅ O(n) Time Complexity → Efficiently traverses and modifies the list.
+     * ✅ O(1) Space Complexity → No extra memory usage.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of nodes in the linked list.
-     * This is because we traverse the entire list once to reverse the pointers.
+     * We iterate through the linked list exactly once, making it linear in time.
      *
      * Space Complexity: O(1)
-     * The space complexity of this solution is O(1), as we reverse the list in place without using additional storage.
+     * We reverse the list in place, requiring no additional memory.
      */
     private static ListNode reverseList(ListNode head) {
         ListNode prev = null;

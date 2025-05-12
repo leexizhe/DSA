@@ -4,33 +4,37 @@ import static answers.f_linked_list.PrintLinkedList.printLinkedList;
 
 public class F5RemoveNthNodeFromEnd {
     /**
+     * Key Techniques:
+     * ✅ Two-Pointer (Fast & Slow) → Finds nth node efficiently.
+     * ✅ O(n) Time Complexity → Traverses the list once.
+     * ✅ O(1) Space Complexity → Modifies list in place.
+     *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of nodes in the linked list.
-     * We make a single pass to find the length and another pass to remove the nth node, resulting in O(n).
+     * We make a single pass through the linked list to find and remove the nth node.
      *
      * Space Complexity: O(1)
-     * The space complexity is O(1), since we only use a few pointers and do not allocate additional data structures.
+     * Since we modify pointers in place, we use constant extra space.
      */
     public static ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode dummy = new ListNode(0); // Dummy node to handle edge cases
+        ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode slow = dummy, fast = dummy;
 
-        // Move fast ahead by n+1 steps to create a gap
-        for (int i = 0; i <= n; i++) {
+        // Step 1: Move fast pointer ahead by 'n' steps
+        for (int i = 0; i < n; i++) {
             fast = fast.next;
         }
 
-        // Move both slow and fast until fast reaches the end
-        while (fast != null) {
+        // Step 2: Move both pointers until fast reaches the end
+        while (fast.next != null) {
             slow = slow.next;
             fast = fast.next;
         }
 
-        // Remove the nth node from the end
+        // Step 3: Remove the nth node by skipping it
         slow.next = slow.next.next;
 
-        return dummy.next; // Return the new head
+        return dummy.next; // Head remains unchanged
     }
 
     public static void main(String[] args) {
@@ -43,9 +47,9 @@ public class F5RemoveNthNodeFromEnd {
         System.out.println("Original List:");
         printLinkedList(head);
 
-        head = removeNthFromEnd(head, 2); // Remove 2nd node from end
+        head = removeNthFromEnd(head, 2);
 
-        System.out.println("Updated List:");
+        System.out.println("List After Removing 2nd Node from End:");
         printLinkedList(head);
     }
 }

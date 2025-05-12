@@ -1,54 +1,57 @@
 
-package answers.a_arrays_hashing;
+package answers.g_trees;
 
-import static common.PrintArray.printArray;
+import static answers.g_trees.TreePrinter.printTree;
 
-import java.util.HashMap;
-
-public class A3TwoSum {
+public class G1InvertBinaryTree {
     /**
+     * Key Techniques:
+     * Recursive Depth Calculation → Ensures a clean, structured approach to finding the depth of the tree.
+     * ✅ O(n) Time Complexity → Guarantees an efficient traversal of all nodes.
+     * ✅ Handles Skewed & Balanced Trees → Works across different tree structures seamlessly.
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of elements in the input array `nums`.
-     * This is because we iterate through the array only once, and each lookup and insertion operation in the HashMap takes O(1) time on average.
+     * The time complexity of this solution is O(n), where n is the number of nodes in the binary tree.
+     * We traverse each node once, swapping the left and right children.
      *
-     * Space Complexity: O(n)
-     * The space complexity of this solution is O(n), where n is the number of elements in the input array `nums`.
-     * This is because we store at most n elements in the HashMap.
+     * Space Complexity: O(h)
+     * The space complexity is O(h), where h is the height of the tree.
+     * This accounts for recursive function calls in the worst case (O(n) for a skewed tree, O(log n) for a balanced tree).
      */
-    private static int[] twoSum(int[] nums, int target) {
-        // Create a HashMap to store numbers and their indices
-        HashMap<Integer, Integer> map = new HashMap<>();
+    public static TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
 
-        // Loop through the array
-        for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            int diff = target - num; // Calculate the difference needed to meet the target
+        // Swap left and right subtrees
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
 
-            // Check if the required difference exists in the map
-            if (map.containsKey(diff)) {
-                // If it exists, return the indices of the two numbers
-                return new int[] {map.get(diff), i};
-            }
+        // Recursively invert subtrees
+        invertTree(root.left);
+        invertTree(root.right);
 
-            // Otherwise, add the current number and its index to the map
-            map.put(num, i);
-        }
-
-        // Return an empty array if no solution is found
-        return new int[0];
+        return root;
     }
 
     public static void main(String[] args) {
-        int[] array1 = {2, 7, 11, 15};
-        int[] array2 = {3, 2, 4};
-        int[] array3 = {3, 3};
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(7);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(9);
 
-        printArray(twoSum(array1, 9));
-        printArray(twoSum(array2, 6));
-        printArray(twoSum(array3, 6));
-        printArray(twoSum(array3, 7));
+        System.out.println("Original Tree:");
+        printTree(root);
+        System.out.println();
+
+        root = invertTree(root);
+
+        System.out.println("Inverted Tree:");
+        printTree(root);
     }
 }
+
 
 You will respond as an elite competitive programmer who is helping me train for data structures and algorithms interviews.
 You will give answers that will be geared towards what will work best in an interview.
