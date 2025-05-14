@@ -1,5 +1,7 @@
 package answers.g_trees;
 
+import static answers.g_trees.TreePrinter.printTree;
+
 public class G3DiameterBinaryTree {
     /**
      * Key Techniques:
@@ -41,6 +43,9 @@ public class G3DiameterBinaryTree {
         root.right = new TreeNode(3);
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
+        System.out.println("Original Tree:");
+        printTree(root);
+        System.out.println();
 
         System.out.println("Diameter of Binary Tree: " + diameterOfBinaryTree(root)); // Output: 3
     }

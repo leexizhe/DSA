@@ -1,43 +1,51 @@
 package answers.g_trees;
 
+import static answers.g_trees.TreePrinter.printTree;
+
 public class G4BalancedBinaryTree {
     /**
      * Key Techniques:
-     * ✅ Recursive traversal → Checks if both trees are identical.
-     * ✅ O(n) Time Complexity → Traverses each node once in both trees.
-     * ✅ Handles edge cases → Works for empty trees and unbalanced structures.
+     * ✅ Depth-First Search (DFS) → Efficiently determines tree height while checking balance.
+     * ✅ O(n) Time Complexity → Traverses all nodes once for optimized performance.
+     * ✅ Returns Height or -1 → Ensures early termination if imbalance is detected.
+     * ✅ Works for all tree structures → Handles skewed and balanced trees seamlessly.
      *
      * Time Complexity: O(n)
-     * The time complexity of this solution is O(n), where n is the number of nodes in the binary trees.
-     * Each node is visited once to check equality.
+     * We traverse the entire binary tree once, ensuring efficient detection of balance.
      *
      * Space Complexity: O(h)
-     * The space complexity is O(h), where h is the height of the tree.
-     * In the worst case (a skewed tree), recursion depth reaches O(n).
-     * In a balanced tree, recursion depth is O(log n).
+     * Recursion depth reaches O(n) for a skewed tree and O(log n) for a balanced tree.
      */
-    public static boolean isSameTree(TreeNode p, TreeNode q) {
-        if (p == null && q == null) return true; // Both trees are empty
-        if (p == null || q == null) return false; // One tree is empty
+    public static boolean isBalanced(TreeNode root) {
+        return dfsHeight(root) != -1;
+    }
 
-        // Check values and recursively compare left & right subtrees
-        return (p.val == q.val) && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    private static int dfsHeight(TreeNode node) {
+        if (node == null) return 0;
+
+        int leftHeight = dfsHeight(node.left);
+        if (leftHeight == -1) return -1; // Early termination for imbalance
+
+        int rightHeight = dfsHeight(node.right);
+        if (rightHeight == -1) return -1; // Early termination for imbalance
+
+        if (Math.abs(leftHeight - rightHeight) > 1) return -1; // Imbalanced tree detected
+
+        return Math.max(leftHeight, rightHeight) + 1; // Return height if balanced
     }
 
     public static void main(String[] args) {
-        TreeNode tree1 = new TreeNode(1);
-        tree1.left = new TreeNode(2);
-        tree1.right = new TreeNode(3);
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
 
-        TreeNode tree2 = new TreeNode(1);
-        tree2.left = new TreeNode(2);
-        tree2.right = new TreeNode(3);
+        System.out.println("Original Tree:");
+        printTree(root);
+        System.out.println();
 
-        TreeNode tree3 = new TreeNode(1);
-        tree3.left = new TreeNode(2);
-        tree3.right = new TreeNode(4); // Different value from tree1
-
-        System.out.println("Tree1 == Tree2: " + isSameTree(tree1, tree2)); // Output: true
-        System.out.println("Tree1 == Tree3: " + isSameTree(tree1, tree3)); // Output: false
+        boolean balanced = isBalanced(root);
+        System.out.println("Is Balanced Binary Tree? " + balanced);
     }
 }

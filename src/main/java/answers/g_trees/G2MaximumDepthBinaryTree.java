@@ -1,5 +1,7 @@
 package answers.g_trees;
 
+import static answers.g_trees.TreePrinter.printTree;
+
 public class G2MaximumDepthBinaryTree {
     /**
      * Key Techniques:
@@ -31,6 +33,9 @@ public class G2MaximumDepthBinaryTree {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
+        System.out.println("Original Tree:");
+        printTree(root);
+        System.out.println();
 
         System.out.println("Maximum Depth: " + maxDepth(root)); // Output: 3
     }

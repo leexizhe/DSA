@@ -1,5 +1,7 @@
 package answers.g_trees;
 
+import static answers.g_trees.TreePrinter.printTree;
+
 public class G6SubtreeOfAnotherTree {
     /**
      * Key Techniques:
@@ -35,10 +37,16 @@ public class G6SubtreeOfAnotherTree {
         root.right = new TreeNode(5);
         root.left.left = new TreeNode(1);
         root.left.right = new TreeNode(2);
+        System.out.println("Original Tree:");
+        printTree(root);
+        System.out.println();
 
         TreeNode subRoot = new TreeNode(4);
         subRoot.left = new TreeNode(1);
         subRoot.right = new TreeNode(2);
+        System.out.println("Original SubTree:");
+        printTree(subRoot);
+        System.out.println();
 
         System.out.println("Is Subtree: " + isSubtree(root, subRoot)); // Output: true
     }

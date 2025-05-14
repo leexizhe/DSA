@@ -1,5 +1,7 @@
 package answers.g_trees;
 
+import static answers.g_trees.TreePrinter.printTree;
+
 public class G5SameBinaryTree {
     /**
      * Key Techniques:
@@ -28,14 +30,23 @@ public class G5SameBinaryTree {
         TreeNode tree1 = new TreeNode(1);
         tree1.left = new TreeNode(2);
         tree1.right = new TreeNode(3);
+        System.out.println("tree1:");
+        printTree(tree1);
+        System.out.println();
 
         TreeNode tree2 = new TreeNode(1);
         tree2.left = new TreeNode(2);
         tree2.right = new TreeNode(3);
+        System.out.println("tree2:");
+        printTree(tree2);
+        System.out.println();
 
         TreeNode tree3 = new TreeNode(1);
         tree3.left = new TreeNode(2);
         tree3.right = new TreeNode(4); // Different value from tree1
+        System.out.println("tree3:");
+        printTree(tree3);
+        System.out.println();
 
         System.out.println("Tree1 == Tree2: " + isSameTree(tree1, tree2)); // Output: true
         System.out.println("Tree1 == Tree3: " + isSameTree(tree1, tree3)); // Output: false
