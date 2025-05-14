@@ -68,11 +68,13 @@ public class G9BinaryTreeRightSideView {
             TreeNode rightMostNode = null;
 
             for (int i = 0; i < levelSize; i++) {
-                TreeNode current = queue.poll();
-                rightMostNode = current; // Track last node in this level
+                TreeNode node = queue.poll();
 
-                if (current.left != null) queue.add(current.left);
-                if (current.right != null) queue.add(current.right);
+                if (node != null) {
+                    rightMostNode = node; // Track last node in this level
+                    queue.add(node.left);
+                    queue.add(node.right);
+                }
             }
 
             if (rightMostNode != null) result.add(rightMostNode.val);
