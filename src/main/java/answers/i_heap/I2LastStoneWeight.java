@@ -17,7 +17,6 @@ public class I2LastStoneWeight {
      * Space Complexity: O(n)
      * - Stores all stones in a **PriorityQueue**.
      */
-
     public static int lastStoneWeight(int[] stones) {
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 
