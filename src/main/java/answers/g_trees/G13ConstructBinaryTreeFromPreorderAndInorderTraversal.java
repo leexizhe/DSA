@@ -2,7 +2,7 @@ package answers.g_trees;
 
 import static answers.g_trees.TreePrinter.printTree;
 
-public  class G13ConstructBinaryTreeFromPreorderAndInorderTraversal {
+public class G13ConstructBinaryTreeFromPreorderAndInorderTraversal {
     /**
      * Key Techniques:
      * ✅ Recursive DFS Approach → Constructs the tree without using a HashMap for inorder indexing
@@ -15,6 +15,7 @@ public  class G13ConstructBinaryTreeFromPreorderAndInorderTraversal {
      * Due to recursive depth in worst-case scenarios (O(log n) for balanced trees, O(n) for skewed trees).
      */
     static int preIdx = 0;
+
     static int inIdx = 0;
 
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
