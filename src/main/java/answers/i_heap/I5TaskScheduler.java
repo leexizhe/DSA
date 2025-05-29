@@ -27,6 +27,7 @@ public class I5TaskScheduler {
             counts[task - 'A']++;
         }
 
+        // MaxHeap to prioritize tasks with highest frequency
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
         for (int count : counts) {
             if (count > 0) {
