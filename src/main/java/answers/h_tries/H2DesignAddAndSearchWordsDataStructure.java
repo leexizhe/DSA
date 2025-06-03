@@ -65,10 +65,10 @@ public class H2DesignAddAndSearchWordsDataStructure {
         wordDictionary.addWord("grape");
 
         // Searching words
-        System.out.println(wordDictionary.search("apple"));  // true
-        System.out.println(wordDictionary.search("app.."));  // true (wildcard match)
+        System.out.println(wordDictionary.search("apple")); // true
+        System.out.println(wordDictionary.search("app..")); // true (wildcard match)
         System.out.println(wordDictionary.search("banana")); // true
-        System.out.println(wordDictionary.search("gr.pe"));  // true (wildcard match)
+        System.out.println(wordDictionary.search("gr.pe")); // true (wildcard match)
         System.out.println(wordDictionary.search("orange")); // false
     }
 }
