@@ -22,20 +22,20 @@ public class J4Permutations {
         return result;
     }
 
-    private static void backtrack(int[] nums, List<Integer> tempList, List<List<Integer>> result) {
+    private static void backtrack(int[] nums, List<Integer> cur, List<List<Integer>> result) {
         // Base case: if temporary list contains all elements, add to result
-        if (tempList.size() == nums.length) {
-            result.add(new ArrayList<>(tempList));
+        if (cur.size() == nums.length) {
+            result.add(new ArrayList<>(cur));
             return;
         }
 
         // Iterate through choices
         for (int num : nums) {
-            if (tempList.contains(num)) continue; // Skip if already used
+            if (cur.contains(num)) continue; // Skip if already used
 
-            tempList.add(num);
-            backtrack(nums, tempList, result); // Recur
-            tempList.remove(tempList.size() - 1); // Backtrack
+            cur.add(num);
+            backtrack(nums, cur, result); // Recur
+            cur.remove(cur.size() - 1); // Backtrack
         }
     }
 
