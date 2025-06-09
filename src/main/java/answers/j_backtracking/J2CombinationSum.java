@@ -22,7 +22,8 @@ public class J2CombinationSum {
         return result;
     }
 
-    private static void backtrack(int start, int[] candidates, int target, List<Integer> current, List<List<Integer>> result) {
+    private static void backtrack(
+            int start, int[] candidates, int target, List<Integer> current, List<List<Integer>> result) {
         if (target == 0) {
             result.add(new ArrayList<>(current)); // Store valid combination
             return;
@@ -31,7 +32,7 @@ public class J2CombinationSum {
         for (int i = start; i < candidates.length; i++) {
             if (candidates[i] > target) continue; // Prune unnecessary recursion
 
-            current.add(candidates[i]);  // Include current number
+            current.add(candidates[i]); // Include current number
             backtrack(i, candidates, target - candidates[i], current, result); // Allow reuse
             current.remove(current.size() - 1); // Backtrack and try next option
         }
@@ -55,7 +56,8 @@ public class J2CombinationSum {
         return result;
     }
 
-    private static void dfs(int index, int[] candidates, int target, List<Integer> current, List<List<Integer>> result) {
+    private static void dfs(
+            int index, int[] candidates, int target, List<Integer> current, List<List<Integer>> result) {
         if (target == 0) {
             result.add(new ArrayList<>(current)); // Store valid combination
             return;
@@ -63,7 +65,7 @@ public class J2CombinationSum {
 
         if (index >= candidates.length || target < 0) return; // Stop if out of bounds or invalid target
 
-        current.add(candidates[index]);  // Include current number
+        current.add(candidates[index]); // Include current number
         dfs(index, candidates, target - candidates[index], current, result); // Stay at the same index (allow reuse)
 
         current.remove(current.size() - 1); // Backtrack

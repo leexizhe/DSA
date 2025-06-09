@@ -25,7 +25,7 @@ public class J1Subsets {
         result.add(new ArrayList<>(current)); // Add current subset
 
         for (int i = start; i < nums.length; i++) {
-            current.add(nums[i]);  // Include current element
+            current.add(nums[i]); // Include current element
             backtrack(i + 1, nums, current, result);
             current.remove(current.size() - 1); // Backtrack: remove last element
         }
@@ -56,7 +56,7 @@ public class J1Subsets {
             return;
         }
 
-        subset.add(nums[i]);  // Include current element
+        subset.add(nums[i]); // Include current element
         dfs(nums, i + 1, subset, res);
 
         subset.remove(subset.size() - 1); // Exclude current element (Backtrack)

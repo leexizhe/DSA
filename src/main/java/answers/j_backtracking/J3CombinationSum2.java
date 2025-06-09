@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class J2CombinationSum2 {
+public class J3CombinationSum2 {
     /**
      * Key Techniques:
      * ✅ Sorting + Pruning → Helps efficiently skip duplicate elements.
